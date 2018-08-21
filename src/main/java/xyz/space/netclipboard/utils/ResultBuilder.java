@@ -14,11 +14,19 @@ public class ResultBuilder<T> {
     private String msg;
     private T data;
 
+    private ResultBuilder() {
+        error = SUCCESS_CODE;
+        msg = StringUtils.EMPTY;
+    }
 
     private ResultBuilder(T t) {
         error = SUCCESS_CODE;
         msg = StringUtils.EMPTY;
         data = t;
+    }
+
+    public static <T> ResultBuilder<T> builder() {
+        return new ResultBuilder();
     }
 
     public static <T> ResultBuilder<T> builder(T t) {

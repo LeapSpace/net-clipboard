@@ -26,14 +26,14 @@
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $("#msg-submit").click(function(){
-        var msg = $("#msg-value").text;
+        var msg = $("#msg-value").val();
         $.post("/clipboard/set.json",{"msg": msg},function(data){
             $("#pass-values").append("<tr><td>"+data.data+"</td></tr>");
             $("#last-pass").val(data.data);
         })
     });
     $("#pass-submit").click(function () {
-        var pass = $("#pass-value").text;
+        var pass = $("#pass-value").val();
         $.get("/clipboard/get.json",{"pass": pass},function (data) {
             $("#msg-values").val(data.data)
         });

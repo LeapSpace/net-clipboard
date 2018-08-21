@@ -26,7 +26,7 @@ public class ClipboardServiceImpl implements ClipboardService {
      */
     @Override
     public String put(String msg) {
-        String pass = RandomStringUtils.randomAlphanumeric(Constant.CLIPBOARD_KEY_LENGTH);
+        String pass = RandomStringUtils.randomNumeric(Constant.CLIPBOARD_KEY_LENGTH);
         String key = Constant.CLIPBOARD_KEY + pass;
         stringRedisTemplate.opsForValue().set(key, msg, Constant.CLIPBOARD_KEY_EXPIRE, TimeUnit.SECONDS);
         return pass;
