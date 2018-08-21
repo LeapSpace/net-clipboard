@@ -6,19 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>network-clipboard</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        .container .back{
+            background-color: gray;
+        }
+    </style>
 </head>
 <body>
 
 <h2>网页剪切板</h2>
 <div class="container">
-    <div id="last-pass">
-        <input disabled/>
+    <div>
+        <input class="back" id="last-pass" disabled/>
     </div>
-
+    <br/>
     <div id="pass-area" class="">
         <input id="pass-value" type="text">
         <button id="pass-submit">提交</button>
     </div>
+    <br/>
     <div id="msg-area">
         <textarea id="msg-value"></textarea>
         <button id="msg-submit">提交</button>
