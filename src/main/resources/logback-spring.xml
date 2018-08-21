@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--<include resource="org/springframework/boot/logging/logback/default.xml"/>-->
+
+    <appender name="stderr" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <File>logs/stderr.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>logs/stderr.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- keep 90 days' worth of history -->
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<Pattern>%d{HH:mm:ss.SSS} %-5level %logger - %msg %n</Pattern>-->
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level - [%replace(%caller{1}){' at |\t|Caller.{1}0|\r|\n', ''}] - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{HH:mm:ss.SSS} %-5level %logger - %msg %n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="stdout" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/stdout.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>logs/stdout.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- keep 90 days' worth of history -->
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<Pattern>%d{HH:mm:ss.SSS} %-5level %logger - %msg %n</Pattern>-->
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level - [%replace(%caller{1}){' at |\t|Caller.{1}0|\r|\n', ''}] - %msg%n</Pattern>
+            <!--<Pattern>%d %-5p - [%l] - %m%n</Pattern>-->
+        </encoder>
+    </appender>
+
+    <springProfile name="dev,test,beta">
+        <logger name="xyz.space" level="DEBUG">
+            <appender-ref ref="stderr"/>
+            <appender-ref ref="stdout"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="xyz.space" level="INFO">
+            <appender-ref ref="stderr"/>
+            <appender-ref ref="stdout"/>
+        </logger>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
