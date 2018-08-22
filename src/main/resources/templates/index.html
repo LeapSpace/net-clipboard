@@ -5,39 +5,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>network-clipboard</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style type="text/css">
-        .container .back{
-            background-color: gray;
+        body {
+            background: #393f4f;
         }
-        #msg-value{
-            width: 500px;
-            height: 400px;
+        .container{
+            background: #fff;
+            position: fixed;
+            width: 800px;
+            height: 480px;
+            border-radius: 10px;
+            padding: 30px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .opt-area {
+            display: flex;
+            margin: 15px 0;
+        }
+        .left-side {
+            flex: 1;
+            padding: 30px;
+        }
+        .right-side {
+            flex: 1;
+            padding: 30px;
         }
     </style>
 </head>
 <body>
 
-<h2>网页剪切板</h2>
 <div class="container">
-    <div>
-        <input class="back" id="last-pass" disabled/>
-    </div>
-    <br/>
-    <div id="pass-area" class="">
-        <input id="pass-value" type="text">
-        <button id="pass-submit">提交</button>
-    </div>
-    <br/>
-    <div id="msg-area">
-        <textarea id="msg-value"></textarea>
-        <button id="msg-submit">提交</button>
+    <h2 class="text-center">网页剪切板</h2>
+    <div class="opt-area">
+        <div class="left-side">
+            <h3>剪切</h3>
+            <div class="form-group row" id="msg-area">
+                <div class="col-9">
+                    <textarea class="form-control" id="msg-value"></textarea>
+                </div>
+                <div class="col-3 text-right">
+                    <button class="btn btn-success" id="msg-submit">提交</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <input class="form-control" id="last-pass" disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <h3>提取</h3>
+            <div class="form-group row" id="msg-area">
+                <div class="col-9">
+                    <input class="form-control" id="pass-value" type="text">
+                </div>
+                <div class="col-3 text-right">
+                    <button class="btn btn-success" id="pass-submit">提交</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <textarea class="form-control" id="msg-get"></textarea>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $("#msg-submit").click(function(){
         var msg = $("#msg-value").val();
@@ -48,7 +86,7 @@
     $("#pass-submit").click(function () {
         var pass = $("#pass-value").val();
         $.get("/clipboard/get.json",{"pass": pass},function (data) {
-            $("#msg-value").val(data.data)
+            $("#msg-get").val(data.data)
         });
     });
 </script>
