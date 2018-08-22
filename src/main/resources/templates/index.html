@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>network-clipboard</title>
+    <title>网页剪切板</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style type="text/css">
         body {
@@ -13,10 +13,11 @@
         .container{
             background: #fff;
             position: fixed;
-            width: 800px;
-            height: 480px;
+            width: 100%;
+            height: 100%;
             border-radius: 10px;
             padding: 30px;
+            margin: 20px 50px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -32,6 +33,9 @@
         .right-side {
             flex: 1;
             padding: 30px;
+        }
+        textarea{
+            min-height: 480px;
         }
     </style>
 </head>
